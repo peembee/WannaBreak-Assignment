@@ -1,0 +1,19 @@
+﻿@model IEnumerable<VacancyList>
+@{
+    ViewData["Title"] = "SearchName";
+}
+
+<h1>Search Name</h1>
+
+<form asp-action="GetSearchNameInput">
+  <div class="form-group">
+    <label for="employeeFirstname">Employee-Name</label>
+    <input type="text" name="employeeFirstname" class="form-control" id="employeeFirstname" placeholder="First Name" required>
+  </div>
+
+  <div class="form-group">
+    <label for="employeeLastname">Employee-Name</label>
+    <input type="text" name="employeeLastname" class="form-control" id="employeeLastname" placeholder="Last Name" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

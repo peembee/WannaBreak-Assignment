@@ -1,0 +1,19 @@
+﻿@model IEnumerable<VacancyList>
+@{
+    ViewData["Title"] = "DateSearch";
+}
+
+<h1>DateSearch</h1>
+
+<form asp-action="GetSearchDateInput">
+  <div class="form-group">
+    <label for="startDate">Start Date</label>
+    <input type="date" name="startDate" class="form-control" id="startDate" placeholder="Start Date">
+
+     <label for="stopDate">Stop Date</label>
+    <input type="date" name="stopDate" class="form-control" id="stopDate" placeholder="Stop Date">
+  </div>
+  <button type="submit" class="btn btn-primary">Get Result</button>
+</form>
+
+            

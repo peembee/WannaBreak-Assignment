@@ -1,0 +1,51 @@
+﻿@model IEnumerable<WannaBreak.Models.VacancyList>
+
+@{
+    ViewData["Title"] = "searchDateResult";
+}
+
+
+<div>
+    <table class="table table-dark table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FK_EmployeeID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FK_VacancyTypeID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Start)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Stop)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RegisteredDate)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FK_EmployeeID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FK_VacancyTypeID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Start)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stop)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RegisteredDate)
+                </td>
+            </tr>}
+        </tbody>
+    </table>
+</div>

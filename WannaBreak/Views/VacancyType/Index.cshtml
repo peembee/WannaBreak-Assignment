@@ -1,0 +1,22 @@
+﻿@model IEnumerable<VacancyType>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>All the types of breaks you can have <h1>
+    <div class="table-responsive">
+        @foreach(var types in Model)
+        {
+            <table class="table table-dark table-hover">
+                <tr>
+                    <td>
+                        <li>
+                            ( @Html.DisplayFor(model => types.VacancyTypeID) )
+                            @Html.DisplayFor(model => types.VacancyTitel) 
+                        </li>
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+

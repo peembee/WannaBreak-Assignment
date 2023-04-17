@@ -1,0 +1,60 @@
+﻿@model IEnumerable<VacancyList>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>List Of All The Searched Breaks</h1>
+<div class="table-responsive">
+    <table class="table table-dark table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.VacancyListID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FK_EmployeeID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FK_VacancyTypeID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Start)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Stop)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.RegisteredDate)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => item.VacancyListID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.FK_EmployeeID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.FK_VacancyTypeID)
+                    </td>
+                     <td>
+                        @Html.DisplayFor(model => item.Start)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.Stop)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.RegisteredDate)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<form asp-action="AddVacancy">           
+<input type="submit" value="Add Break List" class="btn btn-primary" />           
+</form>

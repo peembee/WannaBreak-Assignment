@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewData["Title"] = "loggedIn";
+}
+
+
+<div>
+    <form asp-controller="VacancyList" asp-action="SearchName">     
+         <input type="submit" value="Search Employee" class="btn btn-primary" required /> 
+    </form>
+
+    <form asp-controller="VacancyList" asp-action="DateSearch">           
+        <input type="submit" value="Search list on DATE" class="btn btn-primary" required />  
+    </form>
+</div>
