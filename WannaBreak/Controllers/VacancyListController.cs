@@ -20,7 +20,29 @@ namespace WannaBreak.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await context.VacancyLists.ToListAsync());
+            var newVacancyList = await context.VacancyLists.ToListAsync();
+                                
+
+            foreach (var vacancyList in newVacancyList)    // creates list, changing foreign and primary keys to their name insted of key-number
+            {
+                var employee = await context.Employees
+                    .FirstOrDefaultAsync(e => e.EmployeeID == vacancyList.FK_EmployeeID);
+                if(employee != null)
+                {
+                    vacancyList.EmployeeFullName = employee.FirstName + " " + employee.LastName;
+                    
+                }
+
+                var types = await context.VacancyTypes
+                    .FirstOrDefaultAsync(t => t.VacancyTypeID == vacancyList.FK_VacancyTypeID);
+
+                if (types != null)
+                {
+                    vacancyList.VacancyNameTitel = types.VacancyTitel;
+
+                }
+            }                 
+            return View(newVacancyList);
         }
 
         // Navigation in VacancyListStartPage
@@ -37,7 +59,9 @@ namespace WannaBreak.Controllers
             employeeFirstname = employeeFirstname.Trim();
             employeeLastname = employeeLastname.Trim();
 
-            foreach (var employee in context.Employees)
+            var newEmployeeList = await context.Employees.ToListAsync();
+
+            foreach (var employee in newEmployeeList)
             {
                 if (employeeFirstname.ToLower() == employee.FirstName.ToLower() && employeeLastname.ToLower() == employee.LastName.ToLower())
                 {
@@ -47,11 +71,22 @@ namespace WannaBreak.Controllers
                 }
             }
 
-            if (nameFound)
+            if (nameFound) // changing fk-int key to matching vacancytypes-names
             {
-                var vacancies = await context.VacancyLists
-                                .Where(v => v.FK_EmployeeID == getId).ToListAsync();
-                return View("searchNameResult", vacancies);
+                var newVacancyList = await context.VacancyLists.ToListAsync();
+
+                foreach (var vacancyList in newVacancyList)
+                {
+                    var vacancyTypes = await context.VacancyTypes
+                        .FirstOrDefaultAsync(v => v.VacancyTypeID == vacancyList.FK_VacancyTypeID);
+
+                    if(vacancyTypes != null)
+                    {
+                        vacancyList.VacancyNameTitel = vacancyTypes.VacancyTitel;
+                    }
+                }
+
+                return View("searchNameResult", newVacancyList);
             }
             else
             {
@@ -68,10 +103,30 @@ namespace WannaBreak.Controllers
         //GetSearchDateInput
         public async Task<IActionResult> GetSearchDateInput(DateTime startDate, DateTime stopDate)
         {
-            var vacancies = await context.VacancyLists
-                .Where(v => v.Start >= startDate && v.Stop <= stopDate).ToListAsync();
+            var newVacancyList = await context.VacancyLists.ToListAsync();
 
-            return View("searchDateResult", vacancies);
+
+            foreach (var vacancyList in newVacancyList)
+            {
+                var vacancyTypes = await context.VacancyTypes
+                    .FirstOrDefaultAsync(v => v.VacancyTypeID == vacancyList.FK_VacancyTypeID);        
+
+                if (vacancyTypes != null )
+                {
+                    vacancyList.VacancyNameTitel = vacancyTypes.VacancyTitel;
+                }
+
+                
+                var employee = await context.Employees
+                    
+                    .FirstOrDefaultAsync(e => e.EmployeeID == vacancyList.FK_EmployeeID);
+                if (employee != null)
+                {
+                    vacancyList.EmployeeFullName = employee.FirstName + " " + employee.LastName;
+                }
+            }
+
+            return View("searchDateResult", newVacancyList);
         }
 
         public async Task<IActionResult> AddVacancy()

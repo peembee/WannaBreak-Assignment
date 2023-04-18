@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WannaBreak.Data;
 
@@ -11,9 +12,11 @@ using WannaBreak.Data;
 namespace WannaBreak.Migrations
 {
     [DbContext(typeof(WannaBreakContext))]
-    partial class WannaBreakContextModelSnapshot : ModelSnapshot
+    [Migration("20230418074708_adding new column in VacancyList for saving vacancyTitel")]
+    partial class addingnewcolumninVacancyListforsavingvacancyTitel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
