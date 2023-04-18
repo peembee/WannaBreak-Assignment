@@ -73,10 +73,13 @@ namespace WannaBreak.Controllers
 
             if (nameFound) // changing fk-int key to matching vacancytypes-names
             {
-                var newVacancyList = await context.VacancyLists.ToListAsync();
+                var newVacancyList = await context.VacancyLists
+                    .Where( v => v.FK_EmployeeID == getId )
+                    .ToListAsync();
 
                 foreach (var vacancyList in newVacancyList)
                 {
+
                     var vacancyTypes = await context.VacancyTypes
                         .FirstOrDefaultAsync(v => v.VacancyTypeID == vacancyList.FK_VacancyTypeID);
 
@@ -103,8 +106,9 @@ namespace WannaBreak.Controllers
         //GetSearchDateInput
         public async Task<IActionResult> GetSearchDateInput(DateTime startDate, DateTime stopDate)
         {
-            var newVacancyList = await context.VacancyLists.ToListAsync();
-
+            var newVacancyList = await context.VacancyLists
+                .Where(v => v.Start >= startDate && v.Stop <= stopDate)
+                .ToListAsync();
 
             foreach (var vacancyList in newVacancyList)
             {
@@ -125,7 +129,6 @@ namespace WannaBreak.Controllers
                     vacancyList.EmployeeFullName = employee.FirstName + " " + employee.LastName;
                 }
             }
-
             return View("searchDateResult", newVacancyList);
         }
 
