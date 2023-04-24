@@ -6,7 +6,7 @@
         public string VacancyTypeName { get; set; }
         public DateTime Start { get; set; }
         public DateTime Stop { get; set; }
-        public DateTime RegisteredDate { get; set; }
-        public string EmployeeName { get; set; }
+        public DateTime? RegisteredDate { get; set; }
+        public string? EmployeeName { get; set; }
     }
 }
